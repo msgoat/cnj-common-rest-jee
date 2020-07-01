@@ -1,9 +1,11 @@
 package group.msg.at.cloud.common.rest.tracing;
 
 import group.msg.at.cloud.common.rest.internal.json.SimpleJsonBuilder;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.MultivaluedMap;
@@ -18,6 +20,10 @@ public class TracingContainerRequestFilter implements ContainerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Constants.TRACE_LOGGER_NAME);
 
+    @Inject
+    @ConfigProperty(name = Constants.ENABLED_CONFIG_KEY, defaultValue = Constants.ENABLED_DEFAULT_VALUE)
+    boolean enabled;
+
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         if (shouldFilter(requestContext)) {
@@ -28,7 +34,7 @@ public class TracingContainerRequestFilter implements ContainerRequestFilter {
     }
 
     private boolean shouldFilter(ContainerRequestContext requestContext) {
-        return LOGGER.isInfoEnabled() && !requestContext.getUriInfo().getPath().contains("probes");
+        return enabled && LOGGER.isInfoEnabled() && !requestContext.getUriInfo().getPath().contains("probes");
     }
 
     private void traceRequest(SimpleJsonBuilder builder, ContainerRequestContext request) {
