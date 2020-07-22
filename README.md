@@ -7,13 +7,13 @@ Provides common REST API classes to simplify implementation of JAX-RS based endp
 
 ## Tracing inbound and outbound requests
 
-Tracing of inbound and outbound requests is enabled by default. To disable tracing, simply set configuration key
-`cloudtrain.common.rest.trace.enabled` to __false__.
+Tracing of inbound and outbound requests is disabled by default. To enable tracing, simply set configuration key
+`cloudtrain.common.rest.trace.enabled` to __true__.
 
 All traces are logged using logger `cloudtrain.common.rest.trace`, which is expected to be set to logging level __INFO__.
 
 ## Release information
 
-Latest version is: `1.0.0`.
+Latest version is: `1.1.0`.
 
 A changelog can be found in [changelog.md](changelog.md).

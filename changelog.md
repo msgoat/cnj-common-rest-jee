@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-07-21
+### Added
+- added JwtPropagationClientRequestFilter for automatic propagation of JWTs to downstream services
+### Changed
+- reworked all ClientRequestFilters and ClientResponseFilters to support proper functionality in Payara
+
 ## [1.0.0] - 2020-07-01
 ### Added
 - first revision
