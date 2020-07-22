@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>group.msg.at.cloud.common</groupId>
     <artifactId>cnj-common-rest-jee</artifactId>
-    <version>${revision}${sha1}${changelist}</version>
+    <version>${revision}${changelist}${sha1}</version>
     <packaging>jar</packaging>
     <description>Common classes for inbound and outbound REST endpoints based on Java EE standards (like JAX-RS)</description>
     <properties>
