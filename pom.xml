@@ -12,7 +12,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <javaee.version>8.0</javaee.version>
-        <microprofile.version>3.2</microprofile.version>
+        <microprofile.version>3.3</microprofile.version>
         <slf4j.version>1.7.30</slf4j.version>
         <junit.version>5.6.0</junit.version>
         <mockito.version>3.3.3</mockito.version>
@@ -28,7 +28,7 @@
         <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
         <maven.flatten.plugin.version>1.1.0</maven.flatten.plugin.version>
         <!-- new Maven version management -->
-        <revision>1.0.0</revision>
+        <revision>1.1.0</revision>
         <sha1></sha1>
         <changelist></changelist>
     </properties>
@@ -73,6 +73,16 @@
         <dependency>
             <groupId>org.eclipse.microprofile.config</groupId>
             <artifactId>microprofile-config-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.jwt</groupId>
+            <artifactId>microprofile-jwt-auth-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.rest.client</groupId>
+            <artifactId>microprofile-rest-client-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
