@@ -1,6 +1,8 @@
 package group.msg.at.cloud.common.rest.tracing;
 
 import group.msg.at.cloud.common.rest.internal.json.SimpleJsonBuilder;
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,18 @@ import java.util.List;
 
 /**
  * {@code JAX-RS ClientRequestFilter} which traces outbound requests to downstream services.
+ * <p>
+ * Since Payara (5.2020) does not handle CDI-Injections into ClientRequestFilters registered via {@code @RegisterProvider}
+ * on MicroProfile REST clients very well, the actual MicroProfile configuration values must be looked up programmatically.
+ * </p>
+ * <p>
+ * Quarkus (1.5) complains about CDI injection into JAX-RS providers but supports it nevertheless.
+ * </p>
+ * <p>
+ * <strong>Attention:</strong> With Payara, this {@code ClientRequestFilter} has to be registered explicitly on
+ * MicroProfile REST clients to be actually applied to REST client invocations. Quarkus picks all ClientRequestFilters
+ * automatically.
+ * </p>
  */
 @Provider
 @Priority(Priorities.USER)
@@ -25,9 +39,7 @@ public class TracingClientRequestFilter implements ClientRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Constants.TRACE_LOGGER_NAME);
 
-    @Inject
-    @ConfigProperty(name = Constants.ENABLED_CONFIG_KEY, defaultValue = Constants.ENABLED_DEFAULT_VALUE)
-    boolean enabled;
+    Boolean enabled;
 
     @Override
     public void filter(ClientRequestContext requestContext) throws IOException {
@@ -39,7 +51,7 @@ public class TracingClientRequestFilter implements ClientRequestFilter {
     }
 
     private boolean shouldFilter(ClientRequestContext requestContext) {
-        return enabled && LOGGER.isInfoEnabled();
+        return isEnabled() && LOGGER.isInfoEnabled();
     }
 
     private void traceRequest(SimpleJsonBuilder builder, ClientRequestContext requestContext) {
@@ -55,5 +67,12 @@ public class TracingClientRequestFilter implements ClientRequestFilter {
         });
         builder.stopMap("headers");
         builder.stopObject("request");
+    }
+
+    private boolean isEnabled() {
+        if (enabled == null) {
+            ConfigProvider.getConfig().getOptionalValue(Constants.ENABLED_CONFIG_KEY, Boolean.class).ifPresentOrElse(v -> enabled = v, () -> enabled = Boolean.FALSE);
+        }
+        return enabled;
     }
 }

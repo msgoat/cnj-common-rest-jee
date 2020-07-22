@@ -14,6 +14,10 @@ import java.io.IOException;
 
 /**
  * {@code JAX-RS ContainerResponseFilter} which traces outbound responses to upstream services or frontends.
+ * <p>
+ * In contrast to ClientRequestFilters both CDI injection and automatic detection works well for ContainerRequestFilters
+ * on all MicroProfile capable application servers.
+ * </p>
  */
 @Provider
 public class TracingContainerResponseFilter implements ContainerResponseFilter {

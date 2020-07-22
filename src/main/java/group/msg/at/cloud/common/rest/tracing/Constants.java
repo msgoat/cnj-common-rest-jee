@@ -6,5 +6,5 @@ final class Constants {
 
     static final String ENABLED_CONFIG_KEY = "cloudtrain.common.rest.trace.enabled";
 
-    static final String ENABLED_DEFAULT_VALUE = "true";
+    static final String ENABLED_DEFAULT_VALUE = "false";
 }
