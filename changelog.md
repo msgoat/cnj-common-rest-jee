@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-04-21
+### Added
+### Changed
+- performed lift&shift to new AWS CloudTrain environment
+- update to latest versions of runtime environments pending
+
 ## [1.1.0] - 2020-07-21
 ### Added
 - added JwtPropagationClientRequestFilter for automatic propagation of JWTs to downstream services

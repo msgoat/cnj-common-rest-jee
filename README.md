@@ -3,7 +3,7 @@
 Provides common REST API classes to simplify implementation of JAX-RS based endpoints.
 
 ## Status
-![Build status](https://drone.at41tools.k8s.aws.msgoat.eu/api/badges/msgoat/cnj-common-rest-jee/status.svg)
+![Build status](https://drone.cloudtrain.aws.msgoat.eu/api/badges/msgoat/cnj-common-rest-jee/status.svg)
 
 ## Tracing inbound and outbound requests
 
